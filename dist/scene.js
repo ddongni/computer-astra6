@@ -17,7 +17,7 @@ export function createLab({container,onPartClick,onReady,onError}){
  const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
  let renderer;
  try{renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});}catch(e){onError(e);return null;}
- renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.55;container.appendChild(renderer.domElement);renderer.domElement.setAttribute('aria-label','컴퓨터 3D 모델. 마우스로 회전하거나 터치로 확대하세요.');renderer.domElement.setAttribute('role','img');
+ renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.55;container.appendChild(renderer.domElement);renderer.domElement.setAttribute('aria-label','3D computer model. Drag to rotate or pinch to zoom.');renderer.domElement.setAttribute('role','img');
  const scene=new THREE.Scene();scene.fog=new THREE.Fog('#20272b',19,37);
  const camera=new THREE.PerspectiveCamera(35,1,.1,70);camera.position.set(7.2,4.5,9.4);
  const controls=new OrbitControls(camera,renderer.domElement);controls.target.set(0,0,0);controls.enableDamping=true;controls.dampingFactor=.09;controls.minDistance=5.6;controls.maxDistance=24;controls.maxPolarAngle=Math.PI*.87;controls.enablePan=true;controls.panSpeed=.65;controls.rotateSpeed=.65;
@@ -78,7 +78,7 @@ export function createLab({container,onPartClick,onReady,onError}){
  const selection=new THREE.Box3Helper(new THREE.Box3(),new THREE.Color('#c5f277'));selection.material.transparent=true;selection.material.opacity=.48;selection.visible=false;scene.add(selection);
  let selected=null,labelsVisible=false,exploded=false,cameraTween=null,removedSet=new Set(),disposed=false;
  const labelLayer=document.getElementById('labels');const labelEls={};
- const names={panel:'사이드 패널',motherboard:'메인보드',cpu:'CPU',ram:'메모리',cooler:'CPU 쿨러',gpu:'그래픽카드',ssd:'SSD',psu:'전원 공급 장치',cables:'연결 케이블'};
+ const names={panel:'Side panel',motherboard:'Motherboard',cpu:'CPU',ram:'Memory',cooler:'CPU cooler',gpu:'Graphics card',ssd:'SSD',psu:'Power supply',cables:'Connecting cables'};
  for(const [id,name]of Object.entries(names)){const el=document.createElement('button');el.className='part-label';el.textContent=name;el.hidden=true;el.addEventListener('click',()=>onPartClick(id));labelLayer.appendChild(el);labelEls[id]=el;}
  function cameraTo(view='perspective',wide=false){const scale=wide?1.48:1;const positions={perspective:V(7.2,4.5,9.4),front:V(0,1,12.7),side:V(12.7,1,.1),top:V(.1,13,.1)};const to=(positions[view]||positions.perspective).multiplyScalar(scale);if(reduceMotion){camera.position.copy(to);controls.target.set(0,0,0);cameraTween=null;return;}cameraTween={from:camera.position.clone(),to,targetFrom:controls.target.clone(),start:performance.now()};}
  controls.addEventListener('start',()=>{cameraTween=null;});

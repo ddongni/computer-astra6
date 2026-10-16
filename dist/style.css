@@ -6,3 +6,15 @@
 .lesson{min-width:0}
 @media(max-width:760px){.lab{grid-template-columns:minmax(0,1fr)}.step-list{width:100%}.mode-tabs{flex-shrink:0}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+
+/* The language picker stays visible at every viewport size. */
+.language-switch{height:auto;gap:3px;flex-shrink:0;padding:4px;border:1px solid #3b4649;border-radius:7px;background:#1b2327;font-size:11px}
+.language-switch>a{height:auto;padding:5px 9px;border:0;border-radius:4px;white-space:nowrap;color:#a2b1b5}
+.language-switch>a[aria-current=page]{background:var(--lime);color:#26301e;font-weight:700}
+.language-switch>a:hover{background:#354236;color:#e2f4cf}
+.header-note{margin-left:auto}.header>nav:not(.language-switch){flex-shrink:0}
+html[lang=en] .intro{flex-wrap:wrap}html[lang=en] .intro-meta{flex-wrap:wrap}
+html[lang=en] .instruction p{word-break:normal}html[lang=en] .primary-button,html[lang=en] .secondary-button{white-space:normal;text-align:center}
+html[lang=en] .component-card p{padding-right:10px}
+@media(max-width:1280px){.header-note{display:none}}
+@media(max-width:760px){.header{height:auto;min-height:70px;flex-wrap:wrap;padding:14px 5% 7px;gap:10px}.header .brand{order:0}.language-switch{order:1;margin-left:auto}.header>nav:not(.language-switch){order:2;width:100%;height:32px;justify-content:space-between;gap:15px}.header>nav:not(.language-switch) .text-button{font-size:11px;gap:5px}html[lang=en] .transport{flex-wrap:wrap}html[lang=en] .transport .autoplay{order:3;justify-content:center;width:100%;padding-top:4px}html[lang=en] .interaction-hints{flex-wrap:wrap}html[lang=en] .view-presets button{padding:5px 8px}.language-switch>a{padding:4px 9px}}

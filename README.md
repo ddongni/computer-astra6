@@ -1,6 +1,6 @@
 # PC LAB
 
-한국어 3D 컴퓨터·주변기기·회사 서버 학습 사이트. 정적 파일과 Three.js 0.170.0으로 동작합니다.
+영어 기본·한국어 지원 3D 컴퓨터·주변기기·회사 서버 학습 사이트. 정적 파일과 Three.js 0.170.0으로 동작합니다.
 
 ## 실행
 
@@ -25,8 +25,26 @@
 
 `node --test tests/systems.test.mjs`
 
-14개 상태 전이 테스트로 케이블 분리, 전원 이중화, 배터리 소진, DNS/IP 요청, LAN/게이트웨이 구분, SSH/UFW 및 백업 동작을 확인합니다.
+두 언어에서 14개씩 실행하는 상태 전이 테스트로 케이블 분리, 전원 이중화, 배터리 소진, DNS/IP 요청, LAN/게이트웨이 구분, SSH/UFW 및 백업 동작을 확인합니다.
 
 학습 진행은 현재 페이지 메모리에 유지되며 새로고침하면 초기화됩니다. 모든 장비, IP, 사용자, 명령 응답, 설치 미디어는 가상입니다. 입력한 문장과 실습 설정은 외부로 보내지 않습니다. UPS 유지 시간은 15초로 단축했습니다. RAID와 디스크 파티션은 개념 모델이며 실제 Ubuntu 설치 화면을 그대로 재현하지 않습니다.
 
 실제 조립용 제품 매뉴얼을 대체하지 않는 일반 ATX 학습용 모델입니다. 케이블, 나사, 커넥터의 움직임은 단순화했습니다. 외부 런타임 라이브러리는 `dist/assets`에 포함되어 있으며 폰트 로딩 실패 시 시스템 글꼴을 사용합니다. Three.js 라이선스는 `dist/assets/THREE-LICENSE.txt`에 있습니다.
+
+## English and Korean versions
+
+The root URL opens in English. Korean is available at `/ko/`. Use the **EN / 한국어** selector in the header to switch languages; the selected lab and URL fragment are kept. Switching languages loads a fresh simulation session. Browser language does not override the English default.
+
+- English: `/?lab=pc`, `/?lab=desktop`, `/?lab=server`
+- Korean: `/ko/?lab=pc`, `/ko/?lab=desktop`, `/ko/?lab=server`
+
+Localized source files live in `src/ko/`, with exact English copy in `locales/en.json`. Shared styles, libraries, and the language selector remain in `dist/`. After changing localized content or simulation logic, run:
+
+```sh
+node scripts/build-locales.mjs
+node --test tests/*.test.mjs
+```
+
+The generator fails on missing translations. It writes the English files into `dist/` and the Korean files into `dist/ko/`; do not edit those generated files directly. Both versions share the Three.js assets. `node scripts/build-locales.mjs --check` verifies that the checked-in outputs match their sources. The 14 state-transition scenarios run in both languages (28 checks).
+
+Azure Static Web Apps deploys the ready-to-serve `dist` folder with `skip_app_build: true`, an empty `api_location`, and an empty `output_location`. GitHub Actions verifies localization output and simulation tests before deployment. No runtime environment variables or backend services are required.

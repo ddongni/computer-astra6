@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111416">
+  <meta name="description" content="PC 조립부터 주변기기 연결, 네트워크 통신, 회사 서버 구축과 Linux 설치까지 체험하는 3D 실험실.">
+  <title>PC LAB — 컴퓨터 속을 탐험하다</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23c5f277'/%3E%3Cpath d='M18 22l14-8 14 8v20l-14 8-14-8zM18 22l14 8 14-8M32 30v20' fill='none' stroke='%23111416' stroke-width='4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../systems.css">
+  <script type="importmap">{"imports":{"three":"../assets/three.module.js"}}</script>
+  <link rel="alternate" hreflang="en" href="../">
+  <link rel="alternate" hreflang="ko" href="../ko/">
+  <script type="module" src="../language.js"></script>
+</head>
+<body>
+  <header class="header">
+    <a class="brand" href="#" aria-label="PC LAB 홈"><span class="brand-icon" data-icon="box"></span><span>PC<span class="brand-slash">/</span>LAB<span class="brand-dot">.</span></span></a>
+    <nav aria-label="메인 메뉴"><a href="#simulator" class="nav-active">시뮬레이터</a><a href="#components">부품 알아보기</a><button class="text-button" id="help-button">이용 가이드 <span data-icon="arrow-up-right"></span></button></nav>
+    <span class="header-note"><span class="status-dot"></span>작은 호기심, 큰 발견</span>
+    <nav class="language-switch" aria-label="언어" title="언어 · 변경하면 실습을 새로 시작합니다"><a data-locale="en" lang="en" hreflang="en" href="../">EN</a><a data-locale="ko" lang="ko" hreflang="ko" href="../ko/" aria-current="page">한국어</a></nav>
+  </header>
+  <main>
+    <section class="intro" id="simulator">
+      <div><div class="eyebrow"><span class="little-line"></span> FROM HARDWARE TO HELLO WORLD</div><h1>연결하고, 켜고, <span>이해하다.</span></h1><p>내 책상 위 컴퓨터부터 회사의 첫 서버까지. 모든 시작을 3D로.</p></div>
+      <div class="intro-meta"><span><span data-icon="box"></span> 3개의 실험실</span><span><span data-icon="layers"></span> 연결부터 Linux까지</span><span><span data-icon="sparkles"></span> 직접 해보는 시뮬레이션</span></div>
+    </section>
+    <div class="course-tabs" role="tablist" aria-label="실험실 선택">
+      <button role="tab" id="course-pc" data-course="pc" aria-controls="pc-lab" aria-selected="false"><span class="course-number">01</span><span><strong>PC 내부 탐험</strong><small>부품 분해 · 조립</small></span><span data-icon="chip"></span></button>
+      <button role="tab" id="course-desktop" data-course="desktop" aria-controls="system-lab" aria-selected="true" class="active"><span class="course-number">02</span><span><strong>나의 데스크 셋업</strong><small>전원 · 주변기기 · 입출력 · 통신</small></span><span data-icon="cable"></span></button>
+      <button role="tab" id="course-server" data-course="server" aria-controls="system-lab" aria-selected="false"><span class="course-number">03</span><span><strong>회사 서버 & Linux</strong><small>랙 구성 · OS 설치 · 서비스 운영</small></span><span data-icon="motherboard"></span></button>
+    </div>
+    <section id="system-lab" role="tabpanel" aria-labelledby="course-desktop"></section>
+    <section class="lab" id="pc-lab" role="tabpanel" aria-labelledby="course-pc" hidden aria-label="컴퓨터 3D 실험실">
+      <aside class="lesson">
+        <div class="mode-tabs" role="tablist" aria-label="시뮬레이션 모드"><button role="tab" aria-selected="true" id="disassemble" class="active"><span data-icon="unbox"></span> 분해하기</button><button role="tab" aria-selected="false" id="assemble"><span data-icon="box"></span> 조립하기</button></div>
+        <div class="lesson-heading"><div class="overline">STEP BY STEP</div><h2 id="lesson-title">하나씩, 안쪽으로</h2><p id="lesson-subtitle">완성된 PC에서 부품을 하나씩 꺼내보세요.</p></div>
+        <div class="progress-caption"><span>진행 상황</span><span><strong id="progress-number">0</strong> / 10</span></div><div class="progress-track"><div id="progress-fill"></div></div>
+        <ol id="step-list" class="step-list" aria-label="학습 단계"></ol>
+        <div class="lesson-foot"><span data-icon="info"></span><span>단계를 선택해 자유롭게 이동할 수 있어요.</span></div>
+      </aside>
+      <div class="workbench">
+        <div class="viewport" id="viewport">
+          <div id="scene" aria-label="드래그로 회전하고 스크롤로 확대할 수 있는 3D 컴퓨터 모델"></div>
+          <div class="viewport-top"><span class="model-caption"><span class="status-dot"></span> ATX DESKTOP <span class="caption-divider">/</span> <span id="scene-status">조립된 상태</span></span><span class="view-badge">3D VIEW</span></div>
+          <div class="view-tools"><button id="labels-button" class="icon-button" title="부품 이름 표시" aria-label="부품 이름 표시" aria-pressed="false" data-icon="tag"></button><button id="reset-camera" class="icon-button" title="시점 초기화" aria-label="시점 초기화" data-icon="rotate"></button><button id="fullscreen" class="icon-button" title="전체 화면" aria-label="전체 화면" data-icon="expand"></button></div>
+          <div id="labels" class="labels"></div>
+          <div id="loading" class="loading"><span class="loading-orbit"></span><span>3D 작업대를 준비하고 있어요</span></div>
+          <div class="model-tag"><span class="model-tag-line"></span><span>STANDARD BUILD<small>ATX · MID TOWER</small></span></div>
+          <div class="view-bottom"><div class="view-presets" aria-label="카메라 시점"><button class="active" data-view="perspective">입체</button><button data-view="front">측면</button><button data-view="side">정면</button><button data-view="top">위</button></div><button id="explode-button" class="outline-button" aria-pressed="false"><span data-icon="layers"></span> 전체 구조 보기</button></div>
+          <div class="axis-gizmo" aria-hidden="true"><i class="axis-y">Y</i><i class="axis-z">Z</i><i class="axis-x">X</i></div>
+        </div>
+        <div class="interaction-hints"><span><span data-icon="mouse"></span> 드래그하여 회전</span><i></i><span><span data-icon="zoom"></span> 스크롤하여 확대</span><i></i><span><span data-icon="pointer"></span> 부품을 클릭해 자세히</span><span class="render-label"><span class="status-dot"></span> REAL-TIME 3D</span></div>
+        <div class="instruction" aria-live="polite"><div class="instruction-icon" id="instruction-icon" data-icon="power"></div><div class="instruction-copy"><div class="instruction-eyebrow" id="instruction-eyebrow">STEP 01 <span>준비</span></div><h3 id="instruction-title">시작하기 전에</h3><p id="instruction-body"></p><div class="tip" id="instruction-tip"></div></div><span class="instruction-counter" id="instruction-counter">01<small>/ 10</small></span></div>
+        <div class="transport"><button class="secondary-button" id="previous"><span data-icon="arrow-left"></span> 이전 단계</button><div class="autoplay"><button id="autoplay" class="text-button"><span data-icon="play"></span> 자동 재생</button><select id="speed" aria-label="재생 속도"><option value="1">1×</option><option value="1.5">1.5×</option><option value="2">2×</option></select><button class="icon-button" id="restart" aria-label="처음부터 다시 시작" title="처음부터" data-icon="rotate"></button></div><button class="primary-button" id="next">준비 완료 <span data-icon="arrow-right"></span></button></div>
+      </div>
+    </section>
+    <section id="components" class="components-section" hidden><div class="section-heading"><div><div class="eyebrow">MEET THE COMPONENTS</div><h2>작은 부품들이 만드는 큰 가능성</h2></div><p>부품을 선택하면 역할과 연결 방식을 볼 수 있어요. <span data-icon="arrow-down"></span></p></div><div class="component-grid" id="component-grid"></div></section>
+    <footer><a href="#" class="footer-brand">PC / LAB.</a><p>복잡한 컴퓨터를 이해하는 가장 쉬운 방법.</p><span>EXPLORE. UNDERSTAND. BUILD.</span></footer>
+  </main>
+  <dialog id="component-dialog"><button class="dialog-close icon-button" aria-label="닫기" data-icon="close"></button><div id="component-detail"></div><button class="primary-button" id="component-show">3D에서 확인하기 <span data-icon="arrow-up-right"></span></button></dialog>
+  <dialog id="help-dialog"><button class="dialog-close icon-button" aria-label="닫기" data-icon="close"></button><div class="eyebrow">YOUR FIRST BUILD</div><h2>호기심만 준비하세요.</h2><p class="dialog-intro">마우스 또는 손끝으로 컴퓨터 안을 탐험할 수 있어요.</p><div class="help-row"><span data-icon="mouse"></span><div><h3>자유롭게 둘러보기</h3><p>드래그로 회전, 스크롤 또는 두 손가락으로 확대·축소하세요. 시점 버튼으로 원하는 방향을 바로 볼 수 있어요.</p></div></div><div class="help-row"><span data-icon="layers"></span><div><h3>순서대로 배우기</h3><p>다음 단계 버튼으로 진행하거나 자동 재생을 사용하세요. 분해와 조립 모드를 전환하면 처음부터 새로 시작합니다.</p></div></div><div class="help-row"><span data-icon="pointer"></span><div><h3>부품을 더 깊이 이해하기</h3><p>3D 부품을 클릭하거나 아래 부품 카드를 선택하세요. 전체 구조 보기에서는 모든 부품이 펼쳐집니다.</p></div></div><div class="help-row"><span data-icon="cable"></span><div><h3>데스크와 서버까지 연결하기</h3><p>실험실 탭에서 주변기기의 전원·USB·HDMI·LAN을 연결하세요. 회사 서버에서는 랙 설치부터 Linux 설치, SSH와 웹 서비스까지 진행할 수 있습니다. 터미널의 help로 실습 명령을 확인하세요. 진행은 현재 페이지에만 유지되며 새로고침하면 초기화됩니다.</p></div></div><div class="guide-note">일반적인 ATX 데스크톱의 구조를 단순화한 학습용 모델입니다. 실제 커넥터, 고정 방식, 조립 순서는 제품 설명서를 확인하세요. 전원 공급 장치(PSU) 본체 내부는 열지 마세요.</div><p class="keyboard-note"><kbd>←</kbd><kbd>→</kbd> 단계 이동 <kbd>Space</kbd> 재생·일시정지 <kbd>Esc</kbd> 창 닫기</p></dialog>
+  <div id="toast" role="status"></div>
+  <script type="module" src="./app.js"></script>
+  <script type="module" src="./systems.js"></script>
+</body></html>

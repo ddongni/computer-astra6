@@ -15,3 +15,10 @@
 .system-stage:fullscreen{width:100vw;height:100vh;background:#202e35}
 
 #system-progress-fill{height:100%;background:var(--lime);transition:width .35s}.course-tabs small{word-break:keep-all}
+
+/* Allow translated copy to wrap without pushing controls off screen. */
+html[lang=en] .connection-state{white-space:normal;text-align:right;flex:0 0 62px}
+html[lang=en] .connection-copy{min-width:0}html[lang=en] .connection-copy strong,html[lang=en] .connection-copy small{overflow-wrap:anywhere}
+html[lang=en] .panel-heading{flex-wrap:wrap}html[lang=en] .system-transport .primary-button{max-width:58%;min-width:0}
+html[lang=en] .system-transport .stage-counter{flex-shrink:0}html[lang=en] .installer-footer>*{min-width:0}
+@media(max-width:760px){html[lang=en] .system-sidebar h2{padding-right:95px;font-size:17px}html[lang=en] .system-sidebar .secondary-button{max-width:110px}html[lang=en] .connection-state{flex-basis:58px}html[lang=en] .system-transport{gap:8px}html[lang=en] .system-transport .primary-button{max-width:54%;font-size:10px}html[lang=en] .course-tabs small{word-break:normal}html[lang=en] .installer-footer{gap:10px;flex-wrap:wrap}html[lang=en] .installer-footer .primary-button{margin-left:auto}html[lang=en] .terminal-form{flex-wrap:wrap}html[lang=en] .terminal-prompt{flex-basis:100%}}
